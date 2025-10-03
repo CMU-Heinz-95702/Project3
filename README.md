@@ -364,7 +364,7 @@ View the Blockchain
 See the JavaDoc of the main routine in Blockchain.java.  You are asked to experiment and provide some timing
 data and analysis. That commentary will be present in the comments of your main routine of Blockchain.java.
 
-When the user chooses option 1 to add a transaction, their program must (1) ask for the difficulty, (2) ask for the transaction string, (3) actually mine a block with that difficulty, and then print the exact phrase Total execution time to mine this block was X milliseconds. Next, when the user chooses option 2 to verify, their code must check the whole chain and then print Chain verification: TRUE if everything is valid.
+- When the user chooses option 1 to add a transaction, their program must (1) ask for the difficulty, (2) ask for the transaction string, (3) actually mine a block with that difficulty, and then print the exact phrase Total execution time to mine this block was X milliseconds. Next, when the user chooses option 2 to verify, their code must check the whole chain and then print Chain verification: TRUE if everything is valid.
 Menu printing: Every time the program loops, it must display the menu exactly as written, including punctuation and wording.
 If the spacing, periods, or capitalization differ, the test will fail. When the user selects to “View the blockchain,” the program must print a JSON object that includes:
 A top-level JSON array named "ds_chain" containing all the blocks.
@@ -994,4 +994,5 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
