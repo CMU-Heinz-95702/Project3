@@ -381,8 +381,7 @@ You need not employ a system clock. You should be able to make clear statements 
 4. The code illustrates separation of concerns and good style
 
 ## Submission Details 
------
- Submit just Block.java and BlockChain.java to Gradescope
+     Submit just Block.java and BlockChain.java to Gradescope
 -----
 
 ## Task 1 A Client Server Blockchain Simulator
@@ -993,6 +992,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
