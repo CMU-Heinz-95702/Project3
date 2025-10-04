@@ -373,17 +373,15 @@ The exact order of fields inside the JSON is not important, but the keys must ap
 When a user adds new blocks, each block should be mined with the difficulty they enter and linked to the previous one. If the user chooses to corrupt the chain, the program should let them pick a block and change its data without re-mining it. After that, if the user runs verify, the program must detect the problem and clearly print Chain verification: FALSE. When the user repairs the chain, the program should go back to the first broken block, re-mine it and all blocks after it so the links and hashes are fixed. If the user verifies again, it should now print Chain verification: TRUE.
 ----
 
-### Task 0 Grading Rubric 40 Points
-
-Rubric:
-1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the same names and in the same order: 20 points.
+1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the same names and in the same order
 2. The code is well documented: 5 points.
 3. The analysis in the main routine is detailed and clear: 5 Points.
 Within your comments in the main routine, you must describe how this system behaves as the difficulty level increases. Run some experiments by adding new blocks with increasing difficulties. Describe what you find. Be specific and quote some times.
 You need not employ a system clock. You should be able to make clear statements describing the approximate run times associated with addBlock(), isChainValid(), and chainRepair().
-4. The code illustrates separation of concerns and good style: 5 points.
-5. The single PDF file includes three sections correctly labelled: 5 Points.  
+4. The code illustrates separation of concerns and good style
 
+## Submission Details 
+-- Submit just Block.java and BlockChain.java to Gradescope
 -----
 
 ## Task 1 A Client Server Blockchain Simulator
@@ -994,5 +992,6 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
