@@ -364,7 +364,7 @@ View the Blockchain
 See the JavaDoc of the main routine in Blockchain.java.  You are asked to experiment and provide some timing
 data and analysis. That commentary will be present in the comments of your main routine of Blockchain.java.
 
-**Please use the exact same JSON key names as shown above (case-sensitive)**
+**Please use the exact same JSON key names and structure as shown above (case-sensitive)**
 
 
 
@@ -996,6 +996,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
