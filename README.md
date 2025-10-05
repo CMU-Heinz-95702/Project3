@@ -259,10 +259,10 @@ Total execution time to add this block was 198 milliseconds
 6. Exit
 3
 View the Blockchain
-{"ds_chain" : [ {"index" : 0,"time stamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
-{"index" : 1,"time stamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
-{"index" : 2,"time stamp " : "2024-02-16 14:21:59.935","Tx ": "Bob pays Carol 20 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 65307,"difficulty": 4},
-{"index" : 3,"time stamp " : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "0000980FB682AACB67BC202B0861A6B25D47368D8B2F2D2AA2B197F763DA9D07","nonce" : 14417,"difficulty": 4}
+{"ds_chain" : [ {"index" : 0,"timeStamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
+{"index" : 1,"timeStamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
+{"index" : 2,"timeStamp" : "2024-02-16 14:21:59.935","Tx ": "Bob pays Carol 20 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 65307,"difficulty": 4},
+{"index" : 3,"timeStamp " : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "0000980FB682AACB67BC202B0861A6B25D47368D8B2F2D2AA2B197F763DA9D07","nonce" : 14417,"difficulty": 4}
  ], "chainHash":"00003BEBAC2DCD0541FAB71654B61788AC484E2021EF86542D70FACA02E43CBB"}
 0. View basic blockchain status.
 1. Add a transaction to the blockchain.
@@ -298,10 +298,10 @@ Block 2 now holds Bob pays Tony 30 DSCoin
 6. Exit
 3
 View the Blockchain
-{"ds_chain" : [ {"index" : 0,"time stamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
-{"index" : 1,"time stamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
-{"index" : 2,"time stamp " : "2024-02-16 14:21:59.935","Tx ": "Bob pays Tony 30 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 65307,"difficulty": 4},
-{"index" : 3,"time stamp " : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "0000980FB682AACB67BC202B0861A6B25D47368D8B2F2D2AA2B197F763DA9D07","nonce" : 14417,"difficulty": 4}
+{"ds_chain" : [ {"index" : 0,"timeStamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
+{"index" : 1,"timeStamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
+{"index" : 2,"timeStamp " : "2024-02-16 14:21:59.935","Tx ": "Bob pays Tony 30 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 65307,"difficulty": 4},
+{"index" : 3,"timeStamp" : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "0000980FB682AACB67BC202B0861A6B25D47368D8B2F2D2AA2B197F763DA9D07","nonce" : 14417,"difficulty": 4}
  ], "chainHash":"00003BEBAC2DCD0541FAB71654B61788AC484E2021EF86542D70FACA02E43CBB"}
 0. View basic blockchain status.
 1. Add a transaction to the blockchain.
@@ -345,10 +345,10 @@ Total execution time required to verify the chain was 0 milliseconds
 6. Exit
 3
 View the Blockchain
-{"ds_chain" : [ {"index" : 0,"time stamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
-{"index" : 1,"time stamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
-{"index" : 2,"time stamp " : "2024-02-16 14:21:59.935","Tx ": "Bob pays Tony 30 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 28537,"difficulty": 4},
-{"index" : 3,"time stamp " : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "00007A3C0501FC5465326B9CA9FCA2FB9CDEF0B459B3F542BA5B778DC724E278","nonce" : 202928,"difficulty": 4}
+{"ds_chain" : [ {"index" : 0,"timeStamp " : "2024-02-16 14:20:10.92","Tx ": "Genesis","PrevHash" : "","nonce" : 23,"difficulty": 2},
+{"index" : 1,"timeStamp " : "2024-02-16 14:21:09.493","Tx ": "Alice pays Bob 100 DSCoin","PrevHash" : "009CA7F52F76137CE4E909F1AFFF143FFEBFC8E9BB0352C2CE635B6DA56C7533","nonce" : 66875,"difficulty": 4},
+{"index" : 2,"timeStamp " : "2024-02-16 14:21:59.935","Tx ": "Bob pays Tony 30 DSCoin","PrevHash" : "0000C6B27DDF1448992041474D3B2708F76F6D93C226A76DC494EA9540D562F6","nonce" : 28537,"difficulty": 4},
+{"index" : 3,"timeStamp " : "2024-02-16 14:22:28.612","Tx ": "Carol pays Donna 10 DSCoin","PrevHash" : "00007A3C0501FC5465326B9CA9FCA2FB9CDEF0B459B3F542BA5B778DC724E278","nonce" : 202928,"difficulty": 4}
  ], "chainHash":"0000F408E8F5C013A4835E6A62D053ADA5D7BFAC921042F5563B8D09E4C55C3F"}
 0. View basic blockchain status.
 1. Add a transaction to the blockchain.
@@ -364,6 +364,10 @@ View the Blockchain
 See the JavaDoc of the main routine in Blockchain.java.  You are asked to experiment and provide some timing
 data and analysis. That commentary will be present in the comments of your main routine of Blockchain.java.
 
+**Please use the exact same JSON key names as shown above (case-sensitive)**
+
+
+
 - When the user chooses option 1 to add a transaction, their program must (1) ask for the difficulty, (2) ask for the transaction string, (3) actually mine a block with that difficulty, and then print the exact phrase Total execution time to mine this block was X milliseconds. Next, when the user chooses option 2 to verify, their code must check the whole chain and then print Chain verification: TRUE if everything is valid.
 Menu printing: Every time the program loops, it must display the menu exactly as written, including punctuation and wording.
 If the spacing, periods, or capitalization differ, the test will fail. When the user selects to “View the blockchain,” the program must print a JSON object that includes:
@@ -373,9 +377,9 @@ The exact order of fields inside the JSON is not important, but the keys must ap
 When a user adds new blocks, each block should be mined with the difficulty they enter and linked to the previous one. If the user chooses to corrupt the chain, the program should let them pick a block and change its data without re-mining it. After that, if the user runs verify, the program must detect the problem and clearly print Chain verification: FALSE. When the user repairs the chain, the program should go back to the first broken block, re-mine it and all blocks after it so the links and hashes are fixed. If the user verifies again, it should now print Chain verification: TRUE.
 ----
 
-1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the same names and in the same order
-2. The code is well documented: 5 points.
-3. The analysis in the main routine is detailed and clear: 5 Points.
+1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the **same names** and in the **same order**
+2. The code is well documented
+3. The analysis in the main routine is detailed and clear
 Within your comments in the main routine, you must describe how this system behaves as the difficulty level increases. Run some experiments by adding new blocks with increasing difficulties. Describe what you find. Be specific and quote some times.
 You need not employ a system clock. You should be able to make clear statements describing the approximate run times associated with addBlock(), isChainValid(), and chainRepair().
 4. The code illustrates separation of concerns and good style
@@ -992,6 +996,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
