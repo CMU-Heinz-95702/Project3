@@ -390,7 +390,7 @@ You need not employ a system clock. You should be able to make clear statements 
 
 ## Task 1 A Client Server Blockchain Simulator
 
-The client side execution of Task 1 will appear exactly the same as in Task 0. The primary difference will be that, behind the scenes, there will be a client server interaction using JSON over TCP sockets. The blockchain will exist on the server. It will be constructed there and the client will make requests for operations over a TCP socket. The client will be focused on driving the menu driven interaction and communicating with the server on the backend. If the client exits, the server will still handle new requests with the existing blockchain intact.
+The client side execution of Task 1 will appear exactly the same as in Task 0. The primary difference will be that, behind the scenes, there will be a client server interaction using JSON over TCP sockets. The blockchain will exist on the server. It will be constructed there and the client will make requests for operations over a TCP socket. The client will be focused on driving the menu driven interaction and communicating with the server on the backend. If the client exits, the server will still handle new requests with the existing blockchain intact. This task requires you to build a client-server blockchain application using TCP sockets and JSON for communication. The blockchain will reside on the server, and the client will interact with it through JSON-formatted requests and responses.
 
 Here is a TCP server from the Coulouris text. It listens on port 777. Run this before running the client.
 
@@ -507,9 +507,130 @@ You are required to design and use two JSON messages types - a message to encaps
 requests from the client and a message to encapsulate responses from the server. The server side display will
 show each request message (received from the client -in JSON) and each response message (being sent to the client - in JSON).
 
-In Project 2, you were provided with the structure for request and response messages. In Project 3, we are asking that you design your own request and response messages.
+In this project , you are provided with the structure for request and response messages. 
 
 You should have a class named RequestMessage and a class named ResponseMessage to encapsulate the JSON data. You need to include these classes in your submission. You will use the RequestMessage class on both the client and the server. And, you will use the ResponseMessage class on both the client and the server.
+
+```
+/**
+ * RequestMessage - Encapsulates client requests to the blockchain server
+ */
+public class RequestMessage {
+    private String operation;    // Operation to perform
+    private int index;           // Block index (use -1 if not needed)
+    private String difficulty;   // Difficulty level (use "" if not needed)
+    private String data;         // Transaction data (use "" if not needed)
+    
+    // Default constructor (required for JSON serialization)
+    public RequestMessage() {
+    }
+    
+    // Constructor for operations without parameters
+    public RequestMessage(String operation) {
+        this.operation = operation;
+        this.index = -1;
+        this.difficulty = "";
+        this.data = "";
+    }
+    
+    // Constructor for operations with index
+    public RequestMessage(String operation, int index) {
+        this.operation = operation;
+        this.index = index;
+        this.difficulty = "";
+        this.data = "";
+    }
+    
+    // Constructor for add block operation
+    public RequestMessage(String operation, String difficulty, String data) {
+        this.operation = operation;
+        this.difficulty = difficulty;
+        this.data = data;
+        this.index = -1;
+    }
+    
+    // Getters and Setters
+    public String getOperation() { return operation; }
+    public void setOperation(String operation) { this.operation = operation; }
+    
+    public int getIndex() { return index; }
+    public void setIndex(int index) { this.index = index; }
+    
+    public String getDifficulty() { return difficulty; }
+    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+    
+    public String getData() { return data; }
+    public void setData(String data) { this.data = data; }
+    
+    @Override
+    public String toString() {
+        return "RequestMessage{" +
+                "operation='" + operation + '\'' +
+                ", index=" + index +
+                ", difficulty='" + difficulty + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
+}
+```
+
+```
+/**
+ * ResponseMessage - Encapsulates server responses to client requests
+ */
+public class ResponseMessage {
+    private String status;        // "success" or "error"
+    private String message;       // Detailed message
+    private String data;          // Response data (JSON string for complex data)
+    private long executionTime;   // Execution time in milliseconds
+    
+    // Default constructor (required for JSON serialization)
+    public ResponseMessage() {
+    }
+    
+    // Constructor for simple responses
+    public ResponseMessage(String status, String message) {
+        this.status = status;
+        this.message = message;
+        this.data = "";
+        this.executionTime = 0;
+    }
+    
+    // Full constructor
+    public ResponseMessage(String status, String message, String data, long executionTime) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+        this.executionTime = executionTime;
+    }
+    
+    // Getters and Setters
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
+    
+    public String getData() { return data; }
+    public void setData(String data) { this.data = data; }
+    
+    public long getExecutionTime() { return executionTime; }
+    public void setExecutionTime(long executionTime) { this.executionTime = executionTime; }
+    
+    @Override
+    public String toString() {
+        return "ResponseMessage{" +
+                "status='" + status + '\'' +
+                ", message='" + message + '\'' +
+                ", data='" + data + '\'' +
+                ", executionTime=" + executionTime +
+                '}';
+    }
+}
+
+```
+
+
 
 Use the following four labels in your single PDF:
 
@@ -544,15 +665,159 @@ etc.
 
 ```
 
-**Task 1 Client Source Code in the file ClientTCP.java.**
+## Required Files
+You must submit the following files with **exact names**:
 
-Include all client side source code clearly labelled. This includes the RequestMessage and ResponseMessage classes.
+- `ServerTCP.java` - The server that hosts the blockchain
+- `ClientTCP.java` - The client that interacts with the server
+- `RequestMessage.java` - POJO class for client requests
+- `ResponseMessage.java` - POJO class for server responses
+- All supporting blockchain classes (Block.java, BlockChain.java, etc.)
 
-**Task 1 Server Source Code in the file ServerTCP.java.**
+## Operation Name Mapping
 
-Include all server side source code clearly labelled. This includes the RequestMessage and ResponseMessage classes. These will be the same classes as found on the client side.
+**CRITICAL**: The `operation` field in RequestMessage must **exactly match** these strings:
 
-**Task 1 Grading Rubric 40 Points**
+| Menu Option | User Description | Operation String | Required Fields |
+|-------------|------------------|------------------|-----------------|
+| 0 | View basic blockchain status | `"status"` | None |
+| 1 | Add a transaction to the blockchain | `"add"` | `difficulty`, `data` |
+| 2 | Verify the blockchain | `"verify"` | None |
+| 3 | View the blockchain | `"view"` | None |
+| 4 | Corrupt the chain | `"corrupt"` | `index`, `data` |
+| 5 | Hide corruption by repairing | `"repair"` | None |
+
+### Example Request Creation
+
+```java
+// Menu option 0: View status
+RequestMessage request = new RequestMessage("status");
+
+// Menu option 1: Add block
+RequestMessage request = new RequestMessage("add", "4", "Alice pays Bob 100");
+
+// Menu option 2: Verify
+RequestMessage request = new RequestMessage("verify");
+
+```
+
+## Server Implementation Requirements
+
+### Routing Requests
+Your server must check the `operation` field and route to the appropriate handler:
+
+```java
+RequestMessage requestMessage = gson.fromJson(jsonRequest, RequestMessage.class);
+String operation = requestMessage.getOperation();
+
+if (operation.equals("status")) {
+    displayBlockStatus();
+} else if (operation.equals("add")) {
+    addBlocks(requestMessage);
+.
+.
+.
+```
+
+### Response Format
+
+**For "view" operation**, the response `data` field must contain a JSON string with this structure:
+```json
+{
+  "ds_chain": [
+    {
+      "index": 0,
+      "timestamp": "2025-10-06 12:34:56.789",
+      "Tx": "Genesis",
+      "PrevHash": "",
+      "nonce": "123",
+      "difficulty": 2
+    }
+  ],
+  "chainHash": "0123456789ABCDEF..."
+}
+```
+
+**For "status" operation**, the response `data` field must contain a JSON string with blockchain metrics.
+
+## Server Output Requirements
+
+Your server must print:
+1. The incoming JSON request
+2. The outgoing JSON response
+3. The number of blocks on the chain after each operation
+
+Example server console output:
+```
+Blockchain server running on port 7777
+We have a visitor
+{"operation":"add","index":-1,"difficulty":"2","data":"Alice pays Bob 10"}
+{"status":"success","message":"Total execution time to add this block was 15 milliseconds","data":"","executionTime":0}
+Number of Blocks on Chain == 2
+```
+
+## Port Configuration
+
+- Server must listen on port **7777**
+- Client connects to `localhost:7777` (or server address provided as command line argument)
+
+## JSON Library
+
+Use **Gson** for JSON serialization/deserialization:
+```java
+Gson gson = new Gson();
+
+// Serialize
+String json = gson.toJson(requestMessage);
+
+// Deserialize
+RequestMessage req = gson.fromJson(jsonString, RequestMessage.class);
+ResponseMessage resp = gson.fromJson(jsonString, ResponseMessage.class);
+```
+
+## Testing
+
+The autograder will:
+1. Start your ServerTCP
+2. Connect directly to port 7777
+3. Send JSON requests with the exact operation names listed above
+4. Verify the JSON responses match the expected format
+
+**Common Mistakes to Avoid:**
+- ❌ Using different operation names (e.g., "addBlock" instead of "add")
+- ❌ Not including `ds_chain` and `chainHash` in view response
+- ❌ Returning blockchain data as JSON array instead of JSON objects
+- ❌ Wrong field names in Block JSON (must use "Tx", "timestamp", "PrevHash", "nonce", "difficulty", "index")
+
+## Submission Checklist
+
+- [ ] Submission on Gradescope under Project 3 Task 1
+- [ ] No need to zip files , submit 6 plain java files during submission
+- [ ] ServerTCP.java with exact filename
+- [ ] ClientTCP.java with exact filename
+- [ ] RequestMessage.java included
+- [ ] ResponseMessage.java included
+- [ ] Block.java
+- [ ] BlockChain.java
+- [ ] Server listens on port 7777
+- [ ] Operation names exactly match: `status`, `add`, `verify`, `view`, `corrupt`, `repair`
+- [ ] View operation returns `ds_chain` and `chainHash` in data field
+- [ ] All Block objects serialize with correct field names
+- [ ] Server prints request JSON, response JSON, and block count
+
+
+
+
+## Grading Rubric (40 Points)
+
+- Client-server architecture with JSON over TCP: **15 points**
+- Well-designed JSON request messages: **5 points**
+- Well-designed JSON response messages: **5 points**
+- Proper separation of concerns (proxy design): **5 points**
+- Correct PDF formatting with labeled sections: **5 points**
+- Autograder tests (4 tests): **Pass all for full credit**
+
+Good luck!
 
 Rubric:
 1. The execution is correct and includes the same tests as above - in the same order. A client server architecture based on JSON messages over TCP sockets is used. 15 points.
@@ -996,6 +1261,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
