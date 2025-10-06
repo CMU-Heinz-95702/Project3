@@ -863,22 +863,12 @@ During one client session, the ID will always be the same. If the client quits a
 
 As before, use a **proxy design** to encapsulate the communication code.
 
-Produce a screen shot (or copy and paste) illustrating a successful execution and submit the interaction in the single pdf file as described at the end of this document. The screen shot (or copy and paste) will show three different clients interacting with the server using three distinct ID&#39;s.
-
 When signing a message using JSON, the normal practice is to construct a JSON message like this:
 
 {"NameOfField1":"Value1", "NameOfField2":"Value2","signature":"value of signature"}
 
 The signature value is an encrypted hash of the concatenation of all of the values (except the signature value) and does not include the names. This should make signature creation and verification easier to do. So, in this example, you would really only sign "Value1" + "Value2". You would not include "NameOfField1" or "NameOfField2" in the computation of the signature.
 
-
-:checkered_flag:**On your single pdf, make a copy of your client side code and label it clearly as "Project3Task2SigningClient".**
-
-:checkered_flag:**On your single pdf, make a copy of your server side code and label it clearly as "Project3Task2VerifyingServer".**
-
-:checkered_flag:**Take a screenshot (or copy and paste) of your client console screen. Show a single client interacting with the server using the keys generated when the client code is run. All of the client's key material must be displayed on the client side console. Display the private key (d and n) and the public key (e and n). The client will perform a few operations on the server. Each request will be signed. On your single pdf, label this screenshot as "Project3Task2ClientConsole".**
-
-:checkered_flag:**Take a screenshot of your server console screen. It will show each visitor's public key material (e and n) and whether or not the signature is verified. On your single pdf, label this screenshot as "Project3Task2ServerConsole". You will show three different visitors who are all verified.**
 
 **Task 2 Grading Rubric 20 Points**
 
@@ -1240,6 +1230,203 @@ public class ShortMessageVerify {
 }
 ```
 
+## Required Files
+You must submit the following files with **exact names**:
+
+- `VerifyingServerTCP.java` - Server that verifies signatures
+- `SigningClientTCP.java` - Client that signs all requests
+- `RequestMessage.java` - Enhanced with signature fields
+- `ResponseMessage.java` - Same as Task 1
+- All supporting blockchain classes (Block.java, BlockChain.java, etc.)
+
+## Message Classes
+
+### RequestMessage.java (Task 2 Version)
+```java
+/**
+ * RequestMessage - For Task 2 with RSA Digital Signatures
+ */
+public class RequestMessage {
+    // Task 1 fields
+    private String operation;
+    private int index;
+    private String difficulty;
+    private String data;
+    
+    // Task 2 signature fields
+    private String clientID;        // Last 20 bytes of hash(e+n)
+    private String publicKeyE;      // RSA public key component e
+    private String publicKeyN;      // RSA public key component n
+    private String signature;       // Encrypted hash of message
+    
+    // Default constructor
+    public RequestMessage() {
+        this.index = -1;
+        this.difficulty = "";
+        this.data = "";
+    }
+    
+    // Constructor for operations without parameters
+    public RequestMessage(String operation) {
+        this.operation = operation;
+        this.index = -1;
+        this.difficulty = "";
+        this.data = "";
+    }
+    
+    // Constructor for operations with index
+    public RequestMessage(String operation, int index) {
+        this.operation = operation;
+        this.index = index;
+        this.difficulty = "";
+        this.data = "";
+    }
+    
+    // Constructor for add block operation
+    public RequestMessage(String operation, String difficulty, String data) {
+        this.operation = operation;
+        this.difficulty = difficulty;
+        this.data = data;
+        this.index = -1;
+    }
+    
+    // Getters and Setters for Task 1 fields
+    public String getOperation() { return operation; }
+    public void setOperation(String operation) { this.operation = operation; }
+    
+    public int getIndex() { return index; }
+    public void setIndex(int index) { this.index = index; }
+    
+    public String getDifficulty() { return difficulty; }
+    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+    
+    public String getData() { return data; }
+    public void setData(String data) { this.data = data; }
+    
+    // Getters and Setters for Task 2 signature fields
+    public String getClientID() { return clientID; }
+    public void setClientID(String clientID) { this.clientID = clientID; }
+    
+    public String getPublicKeyE() { return publicKeyE; }
+    public void setPublicKeyE(String publicKeyE) { this.publicKeyE = publicKeyE; }
+    
+    public String getPublicKeyN() { return publicKeyN; }
+    public void setPublicKeyN(n publicKeyN) { this.publicKeyN = publicKeyN; }
+    
+    public String getSignature() { return signature; }
+    public void setSignature(String signature) { this.signature = signature; }
+    
+    /**
+     * Returns the message content that should be signed.
+     * Includes: operation + index + difficulty + data
+     * Does NOT include: clientID, publicKeyE, publicKeyN, signature
+     */
+    public String getMessageToSign() {
+        return operation + index + difficulty + data;
+    }
+}
+```
+
+### ResponseMessage.java
+Use the **same ResponseMessage class from Task 1**. No changes needed.
+
+
+## What to Sign
+
+**CRITICAL:** You sign the **concatenation of the request values** (operation, index, difficulty, data), but **NOT** the field names and **NOT** the signature fields themselves.
+
+```java
+// What gets signed:
+String messageToSign = operation + index + difficulty + data;
+
+// Example for "add" operation with difficulty=2, data="Alice pays Bob 100":
+// messageToSign = "add" + "-1" + "2" + "Alice pays Bob 100"
+// messageToSign = "add-12Alice pays Bob 100"
+```
+
+## Server Console Output Requirements
+
+Your server must display for each request:
+1. The incoming JSON request
+2. The client's public key (e and n)
+3. Whether the signature was verified (true/false)
+4. The outgoing JSON response
+5. The number of blocks on chain
+
+Example:
+```
+Blockchain server running on port 7777
+We have a visitor
+{"operation":"add","index":-1,"difficulty":"2","data":"Test transaction","clientID":"a3f5...","publicKeyE":"65537","publicKeyN":"123...","signature":"789..."}
+Client Public Key (e): 65537
+Client Public Key (n): 12345678901234567890...
+Signature verified: true
+{"status":"success","message":"Total execution time to add this block was 25 milliseconds","data":"","executionTime":0}
+Number of Blocks on Chain == 2
+```
+
+## Client Console Output Requirements
+
+Display at startup:
+```
+Client Key Pair:
+Public Key (e): 65537
+Public Key (n): 12345678901234567890123456789012345678901234567890...
+Private Key (d): 98765432109876543210987654321098765432109876543210...
+Client ID: a3f5b2c8d1e4f6a9b7c5d2e1f3a8b6c9d4e7f1a2
+```
+
+Then show the normal menu and interactions as in Task 1.
+
+## Operation Names (Same as Task 1)
+
+| Menu Option | Operation String |
+|-------------|------------------|
+| 0 | `"status"` |
+| 1 | `"add"` |
+| 2 | `"verify"` |
+| 3 | `"view"` |
+| 4 | `"corrupt"` |
+| 5 | `"repair"` |
+
+## Testing
+
+The autograder will:
+1. Start your VerifyingServerTCP
+2. Generate its own RSA keys
+3. Send properly signed requests
+4. Verify responses for valid signatures
+5. Send improperly signed requests and verify they are rejected
+
+## Common Mistakes to Avoid
+
+- ❌ Forgetting to add the padding byte (0) when creating BigInteger from hash
+- ❌ Including signature fields in the message to be signed
+- ❌ Using negative BigIntegers (always ensure positive with padding byte)
+- ❌ Not displaying all key material on client console
+- ❌ Not showing signature verification status on server console
+- ❌ Computing ID incorrectly (must be last 20 bytes of hash, not first 20)
+- ❌ Using String.getBytes() without UTF-8 encoding
+
+## Submission Checklist
+
+- [ ] Submission under Project 3 Task 2
+- [ ] No need to zip files , submit 6 plain java files during submission
+- [ ] VerifyingServerTCP.java with exact filename
+- [ ] SigningClientTCP.java with exact filename
+- [ ] Updated RequestMessage.java with signature fields
+- [ ] ResponseMessage.java (same as Task 1)
+- [ ] Block.java
+- [ ] BlockChain.java
+- [ ] Client displays all keys (e, d, n) and ID at startup
+- [ ] Server verifies both ID and signature before processing
+- [ ] Server displays public key and verification status
+- [ ] Error responses sent for invalid signatures or IDs
+- [ ] All requests are properly signed
+
+
+Good luck!
+
 
 **Project 3 Submission Requirements**
 
@@ -1261,6 +1448,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
