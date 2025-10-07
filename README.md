@@ -631,14 +631,11 @@ public class ResponseMessage {
 }
 
 ```
-
-
-
-Use the following four labels in your single PDF:
+For debugging locally this is how your output must look like
 
 **Task 1 Client Side Execution**
 
-Copy and paste your client side console. This will appear as in Task 0.
+Will look exactly like your Task 0.
 
 **Task 1 Server Side Execution**
 
@@ -1450,6 +1447,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
