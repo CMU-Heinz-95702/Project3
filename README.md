@@ -507,6 +507,8 @@ You are required to design and use two JSON messages types - a message to encaps
 requests from the client and a message to encapsulate responses from the server. The server side display will
 show each request message (received from the client -in JSON) and each response message (being sent to the client - in JSON).
 
+For Task 1 and Task 2 , you are NOT to use any maven or other additional pre built libraries/frameworks other than GSON, it has to be a plain java application. 
+
 In this project , you are provided with the structure for request and response messages. 
 
 You should have a class named RequestMessage and a class named ResponseMessage to encapsulate the JSON data. You need to include these classes in your submission. You will use the RequestMessage class on both the client and the server. And, you will use the ResponseMessage class on both the client and the server.
@@ -1448,6 +1450,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
