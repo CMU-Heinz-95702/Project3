@@ -776,7 +776,7 @@ ResponseMessage resp = gson.fromJson(jsonString, ResponseMessage.class);
 
 ## Testing
 
-The autograder will:
+The autograder (mocking the Client) will:
 1. Start your ServerTCP
 2. Connect directly to port 7777
 3. Send JSON requests with the exact operation names listed above
@@ -1447,6 +1447,7 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
+
 
 
 
