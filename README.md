@@ -166,11 +166,6 @@ The Javadoc describes two classes that you need to write - Block.java and BlockC
 
 In Task 1, you will distribute the application that you created in Task 0. You will write a client server application. The interaction between the client and the server will be with JSON messages (using Gson) over TCP sockets. This is similar to what you did in Project 2 but here we are using TCP rather than UDP.
 
-You will be submitting complete Java programs and console screen interactions on a single PDF file. These should be clearly labelled as described below.
-
-You will also be submitting three IntelliJ projects as three zip files.
-See the very end of this document for a precise description of what needs to be submitted.
-
 Documenting code is important. Be sure to provide comments in your code explaining what the code is doing and why.
 
 Be sure to separate concerns when appropriate. It is fine to add methods that you feel are appropriate.
@@ -364,20 +359,20 @@ View the Blockchain
 See the JavaDoc of the main routine in Blockchain.java.  You are asked to experiment and provide some timing
 data and analysis. That commentary will be present in the comments of your main routine of Blockchain.java.
 
-**Please use the exact same JSON key names and structure as shown above (case-sensitive)**
+**Please use the exact same JSON key names and structure as shown above (the key names are case-sensitive)**
 
 
 
-- When the user chooses option 1 to add a transaction, their program must (1) ask for the difficulty, (2) ask for the transaction string, (3) actually mine a block with that difficulty, and then print the exact phrase Total execution time to mine this block was X milliseconds. Next, when the user chooses option 2 to verify, their code must check the whole chain and then print Chain verification: TRUE if everything is valid.
+- When the user chooses option 1 to add a transaction, their program must (1) ask for the difficulty, (2) ask for the transaction string, (3) actually mine a block (perform proof-of-work) with that difficulty, and then print the exact phrase Total execution time to mine this block was X milliseconds. Next, when the user chooses option 2 to verify, their code must check the whole chain and then print Chain verification: TRUE if everything is valid.
 Menu printing: Every time the program loops, it must display the menu exactly as written, including punctuation and wording.
-If the spacing, periods, or capitalization differ, the test will fail. When the user selects to “View the blockchain,” the program must print a JSON object that includes:
+If the spacing, periods, or capitalization differ, the Gradescope unit tests will fail. When the user selects 3 to “View the blockchain”, the program must print a JSON object that includes:
 A top-level JSON array named "ds_chain" containing all the blocks.
 A top-level string field named "chainHash" with the most recent block’s hash.
-The exact order of fields inside the JSON is not important, but the keys must appear in the output.
+The exact order of fields inside the JSON is not important, but the key names must appear in the output.
 When a user adds new blocks, each block should be mined with the difficulty they enter and linked to the previous one. If the user chooses to corrupt the chain, the program should let them pick a block and change its data without re-mining it. After that, if the user runs verify, the program must detect the problem and clearly print Chain verification: FALSE. When the user repairs the chain, the program should go back to the first broken block, re-mine it and all blocks after it so the links and hashes are fixed. If the user verifies again, it should now print Chain verification: TRUE.
 ----
 
-1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the **same names** and in the **same order**
+1. The execution (as shown by the console interaction) is correct and includes the same tests as above - using the **same names (Alice, Bob, Carol)** and in the **same order**.
 2. The code is well documented
 3. The analysis in the main routine is detailed and clear
 Within your comments in the main routine, you must describe how this system behaves as the difficulty level increases. Run some experiments by adding new blocks with increasing difficulties. Describe what you find. Be specific and quote some times.
@@ -385,7 +380,7 @@ You need not employ a system clock. You should be able to make clear statements 
 4. The code illustrates separation of concerns and good style
 
 ## Submission Details
-     Submit just Block.java and BlockChain.java to Gradescope
+     Submit just Block.java and BlockChain.java to Gradescope. For this task, you are only submitting these two source files.
 -----
 
 ## Task 1 A Client Server Blockchain Simulator
@@ -503,11 +498,11 @@ public class EchoClientTCP {
 
 Your Task 1 client will be named ClientTCP.java ad your Task1 server will be named ServerTCP.java.
 
-You are required to design and use two JSON messages types - a message to encapsulate
+You will use two JSON messages types - a message to encapsulate
 requests from the client and a message to encapsulate responses from the server. The server side display will
 show each request message (received from the client -in JSON) and each response message (being sent to the client - in JSON).
 
-For Task 1 and Task 2 , you are NOT to use any maven or other additional pre built libraries/frameworks other than GSON, it has to be a plain java application.
+For Task 1 and Task 2 , you are NOT to use any maven or other additional pre built libraries or frameworks other than GSON, these are plain java applications.
 
 In this project , you are provided with the structure for request and response messages.
 
@@ -631,16 +626,17 @@ public class ResponseMessage {
 }
 
 ```
-For debugging locally this is how your output must look like
 
 **Task 1 Client Side Execution**
 
-Will look exactly like your Task 0.
+On the client side, this interaction will look exactly like your Task 0.
 
 **Task 1 Server Side Execution**
 
 Here, we will see the request and response messages in JSON format. We will also see the number of
 blocks on the chain after each visit.
+
+Here is the server side presentation:
 
 ```
 Blockchain server running
@@ -807,33 +803,24 @@ The autograder (mocking the Client) will:
 
 
 
-## Grading Rubric (40 Points)
+## Grading Rubric  (things we are looking for)
 
-- Client-server architecture with JSON over TCP: **15 points**
-- Well-designed JSON request messages: **5 points**
-- Well-designed JSON response messages: **5 points**
-- Proper separation of concerns (proxy design): **5 points**
-- Correct PDF formatting with labeled sections: **5 points**
-- Autograder tests (4 tests): **Pass all for full credit**
+- Client-server architecture with JSON over TCP
+- Well-designed JSON request messages
+- Well-designed JSON response messages
+- Proper separation of concerns (proxy design)
+- Autograder tests (4 tests)
 
 Good luck!
 
-Rubric:
-1. The execution is correct and includes the same tests as above - in the same order. A client server architecture based on JSON messages over TCP sockets is used. 15 points.
-2. The JSON request and response messages are well designed. 5 Points
-3. The JSON message being sent to the server is well designed and is represented in RequestMessage.java: 5 Points
-4. The JSON message being sent from the server to the client is well designed and is represented in ResponseMessage.java: 5 Points.
-5. Separation of concerns is well done with a proxy design. : 5 points.
-6. The single PDF file includes sections correctly labelled: 5 Points.
 
------
 ## Task 2 RSA Digital Signatures
 
 ## Task 2 illustrates client authentication using signatures. Name the IntelliJ project "Project3Task2".
 
-Before starting this task, study the three programs below. RSAExample.java shows how you can generate RSA keys in Java. ShortMessageSign.java and ShortMessageVerify.java shows you how you can sign and veify the signature on very small messages.
+Before starting this task, study the three programs below. RSAExample.java shows how you can generate RSA keys in Java. ShortMessageSign.java and ShortMessageVerify.java shows you how you can sign and verify the signature on very small messages.
 
-This Task is modeled after the way an Ethereum blockchain client signs requests. In Ethereum, each request to execute a transaction costs gas. That is, the sender has to pay some amount of Eth for resources used. In Ethereum, each client that wants to to execute a transactions must provide an identifier so that a deduction can be made from his or her account.
+This Task is modeled after the way an Ethereum blockchain client signs requests. In Ethereum, each request to execute a transaction costs gas. Gas is simply a measure of resources used. Gas is paid for in Eth (the native currency on the Ethereum blockchain). That is, the sender has to pay some amount of Eth for resources used by a transaction. In Ethereum, each client that wants to execute a transaction must provide an identifier so that a deduction can be made from his or her account.
 
 Make the following modifications to your work in Task 1.
 
@@ -869,15 +856,13 @@ When signing a message using JSON, the normal practice is to construct a JSON me
 The signature value is an encrypted hash of the concatenation of all of the values (except the signature value) and does not include the names. This should make signature creation and verification easier to do. So, in this example, you would really only sign "Value1" + "Value2". You would not include "NameOfField1" or "NameOfField2" in the computation of the signature.
 
 
-**Task 2 Grading Rubric 20 Points**
+**Task 2 Rubric**
 
 Rubric:
-1. All messages are signed by the client and verified on the server. 10 points.
-3. The JSON message being sent to the server is well designed and is represented in RequestMessage.java: 2 Points
-4. The JSON message being sent from the server to the client is well designed and is represented in ResponseMessage.java: 3 Points.
-5. Separation of concerns is well done with a proxy design. : 2 points.
-6. The single PDF file includes sections correctly labelled: 3 Points.
-
+1. All messages are signed by the client and verified on the server.
+3. The JSON message being sent to the server is well designed and is represented in RequestMessage.java.
+4. The JSON message being sent from the server to the client is well designed and is represented in ResponseMessage.java.
+5. Separation of concerns is well done with a proxy design.
 
 RSAExample.java - Key generation and sample encryption and decryption
 
@@ -1392,9 +1377,9 @@ Then show the normal menu and interactions as in Task 1.
 
 The autograder will:
 1. Start your VerifyingServerTCP
-2. Generate its own RSA keys
-3. Send properly signed requests
-4. Verify responses for valid signatures
+2. Generate its own client side RSA keys
+3. Send properly signed requests to your server
+4. Verify responses from your server for valid signatures
 5. Send improperly signed requests and verify they are rejected
 
 ## Common Mistakes to Avoid
@@ -1423,27 +1408,4 @@ The autograder will:
 - [ ] Error responses sent for invalid signatures or IDs
 - [ ] All requests are properly signed
 
-
 Good luck!
-
-
-**Project 3 Submission Requirements**
-
-Name your three IntelliJ project folders: Project3Task0, Project3Task1, and Project3Task2.
-
-For each IntelliJ project, File->Export Project->To Zip... each. You must export in this way and NOT just zip the IntelliJ project folders.
-
-You should now have three zip files:
-* Project3Task0.zip
-* Project3Task1.zip
-* Project3Task2.zip
-
-You will also have a single pdf named Project3.pdf.
-
-Create a new empty folder named with your Andrew id (**very important**). Put the four files above into this new folder. Zip that folder, and submit it to Canvas.
-
-**The file named YourAndrewID.zip contains three zip files and a single pdf file:**
-* Project3Task0.zip
-* Project3Task1.zip
-* Project3Task2.zip
-* Project3.pdf
