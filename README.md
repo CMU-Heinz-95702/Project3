@@ -1,9 +1,9 @@
 # 95-702 Distributed Systems For Information Systems Management
-## Project 3 Blockchain and Signatures       Spring 2025
+## Project 3 Blockchain and Signatures       Fall 2025
 
 
-Assigned: Monday, February 24, 2025
-Due Monday, March 17, 2025 at 2:00 pm
+Assigned: Thursday, October 9, 2025
+Due Thursday, October 30, 2025
 
 ### Important Note
 
@@ -384,7 +384,7 @@ Within your comments in the main routine, you must describe how this system beha
 You need not employ a system clock. You should be able to make clear statements describing the approximate run times associated with addBlock(), isChainValid(), and chainRepair().
 4. The code illustrates separation of concerns and good style
 
-## Submission Details 
+## Submission Details
      Submit just Block.java and BlockChain.java to Gradescope
 -----
 
@@ -507,9 +507,9 @@ You are required to design and use two JSON messages types - a message to encaps
 requests from the client and a message to encapsulate responses from the server. The server side display will
 show each request message (received from the client -in JSON) and each response message (being sent to the client - in JSON).
 
-For Task 1 and Task 2 , you are NOT to use any maven or other additional pre built libraries/frameworks other than GSON, it has to be a plain java application. 
+For Task 1 and Task 2 , you are NOT to use any maven or other additional pre built libraries/frameworks other than GSON, it has to be a plain java application.
 
-In this project , you are provided with the structure for request and response messages. 
+In this project , you are provided with the structure for request and response messages.
 
 You should have a class named RequestMessage and a class named ResponseMessage to encapsulate the JSON data. You need to include these classes in your submission. You will use the RequestMessage class on both the client and the server. And, you will use the ResponseMessage class on both the client and the server.
 
@@ -522,11 +522,11 @@ public class RequestMessage {
     private int index;           // Block index (use -1 if not needed)
     private String difficulty;   // Difficulty level (use "" if not needed)
     private String data;         // Transaction data (use "" if not needed)
-    
+
     // Default constructor (required for JSON serialization)
     public RequestMessage() {
     }
-    
+
     // Constructor for operations without parameters
     public RequestMessage(String operation) {
         this.operation = operation;
@@ -534,7 +534,7 @@ public class RequestMessage {
         this.difficulty = "";
         this.data = "";
     }
-    
+
     // Constructor for operations with index
     public RequestMessage(String operation, int index) {
         this.operation = operation;
@@ -542,7 +542,7 @@ public class RequestMessage {
         this.difficulty = "";
         this.data = "";
     }
-    
+
     // Constructor for add block operation
     public RequestMessage(String operation, String difficulty, String data) {
         this.operation = operation;
@@ -550,20 +550,20 @@ public class RequestMessage {
         this.data = data;
         this.index = -1;
     }
-    
+
     // Getters and Setters
     public String getOperation() { return operation; }
     public void setOperation(String operation) { this.operation = operation; }
-    
+
     public int getIndex() { return index; }
     public void setIndex(int index) { this.index = index; }
-    
+
     public String getDifficulty() { return difficulty; }
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
-    
+
     public String getData() { return data; }
     public void setData(String data) { this.data = data; }
-    
+
     @Override
     public String toString() {
         return "RequestMessage{" +
@@ -585,11 +585,11 @@ public class ResponseMessage {
     private String message;       // Detailed message
     private String data;          // Response data (JSON string for complex data)
     private long executionTime;   // Execution time in milliseconds
-    
+
     // Default constructor (required for JSON serialization)
     public ResponseMessage() {
     }
-    
+
     // Constructor for simple responses
     public ResponseMessage(String status, String message) {
         this.status = status;
@@ -597,7 +597,7 @@ public class ResponseMessage {
         this.data = "";
         this.executionTime = 0;
     }
-    
+
     // Full constructor
     public ResponseMessage(String status, String message, String data, long executionTime) {
         this.status = status;
@@ -605,20 +605,20 @@ public class ResponseMessage {
         this.data = data;
         this.executionTime = executionTime;
     }
-    
+
     // Getters and Setters
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    
+
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
-    
+
     public String getData() { return data; }
     public void setData(String data) { this.data = data; }
-    
+
     public long getExecutionTime() { return executionTime; }
     public void setExecutionTime(long executionTime) { this.executionTime = executionTime; }
-    
+
     @Override
     public String toString() {
         return "ResponseMessage{" +
@@ -1251,20 +1251,20 @@ public class RequestMessage {
     private int index;
     private String difficulty;
     private String data;
-    
+
     // Task 2 signature fields
     private String clientID;        // Last 20 bytes of hash(e+n)
     private String publicKeyE;      // RSA public key component e
     private String publicKeyN;      // RSA public key component n
     private String signature;       // Encrypted hash of message
-    
+
     // Default constructor
     public RequestMessage() {
         this.index = -1;
         this.difficulty = "";
         this.data = "";
     }
-    
+
     // Constructor for operations without parameters
     public RequestMessage(String operation) {
         this.operation = operation;
@@ -1272,7 +1272,7 @@ public class RequestMessage {
         this.difficulty = "";
         this.data = "";
     }
-    
+
     // Constructor for operations with index
     public RequestMessage(String operation, int index) {
         this.operation = operation;
@@ -1280,7 +1280,7 @@ public class RequestMessage {
         this.difficulty = "";
         this.data = "";
     }
-    
+
     // Constructor for add block operation
     public RequestMessage(String operation, String difficulty, String data) {
         this.operation = operation;
@@ -1288,33 +1288,33 @@ public class RequestMessage {
         this.data = data;
         this.index = -1;
     }
-    
+
     // Getters and Setters for Task 1 fields
     public String getOperation() { return operation; }
     public void setOperation(String operation) { this.operation = operation; }
-    
+
     public int getIndex() { return index; }
     public void setIndex(int index) { this.index = index; }
-    
+
     public String getDifficulty() { return difficulty; }
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
-    
+
     public String getData() { return data; }
     public void setData(String data) { this.data = data; }
-    
+
     // Getters and Setters for Task 2 signature fields
     public String getClientID() { return clientID; }
     public void setClientID(String clientID) { this.clientID = clientID; }
-    
+
     public String getPublicKeyE() { return publicKeyE; }
     public void setPublicKeyE(String publicKeyE) { this.publicKeyE = publicKeyE; }
-    
+
     public String getPublicKeyN() { return publicKeyN; }
     public void setPublicKeyN(n publicKeyN) { this.publicKeyN = publicKeyN; }
-    
+
     public String getSignature() { return signature; }
     public void setSignature(String signature) { this.signature = signature; }
-    
+
     /**
      * Returns the message content that should be signed.
      * Includes: operation + index + difficulty + data
@@ -1447,15 +1447,3 @@ Create a new empty folder named with your Andrew id (**very important**). Put th
 * Project3Task1.zip
 * Project3Task2.zip
 * Project3.pdf
-
-
-
-
-
-
-
-
-
-
-
-
