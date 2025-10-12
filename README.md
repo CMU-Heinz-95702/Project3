@@ -716,24 +716,34 @@ if (operation.equals("status")) {
 
 ### Response Format
 
-**For "view" operation**, the response `data` field must contain a JSON string with this structure:
+**For "view" operation**, the response must contain a JSON string with this structure:
 ```json
 {
-  "ds_chain": [
-    {
-      "index": 0,
-      "timestamp": "2025-10-06 12:34:56.789",
-      "Tx": "Genesis",
-      "PrevHash": "",
-      "nonce": "123",
-      "difficulty": 2
-    }
-  ],
-  "chainHash": "0123456789ABCDEF..."
+  "status": "success",
+  "message": "Blockchain retrieved",
+  "data": "{\"ds_chain\":[{\"index\":0,\"timestamp\":\"2025-10-06 14:23:45.123\",\"Tx\":\"Genesis\",\"PrevHash\":\"\",\"nonce\":\"248\",\"difficulty\":2},{\"index\":1,\"timestamp\":\"2025-10-06 14:24:10.456\",\"Tx\":\"Alice pays Bob 10 DSCoin\",\"PrevHash\":\"00A5B3C2D1E4F6A9B7C5D2E1F3A8B6C9D4E7F1A234567890ABCDEF1234567890\",\"nonce\":\"1523\",\"difficulty\":2}],\"chainHash\":\"00F1E2D3C4B5A6978695A4B3C2D1E0F9E8D7C6B5A4938271605F4E3D2C1B0A09\"}",
+  "executionTime": 0
 }
 ```
 
-**For "status" operation**, the response `data` field must contain a JSON string with blockchain metrics.
+**For "status" operation**, the response must contain a JSON string with blockchain metrics. For example,
+```json
+{
+  "status": "success",
+  "message": "Blockchain status retrieved",
+  "data": "{\"currentSizeOfChain\":2,\"difficultyOfMostRecentBlock\":2,\"totalDifficultyForAllBlocks\":4,\"experimentedHashes\":2000000,\"approximateHashesPerSecond\":500000,\"expectedTotalHashesRequired\":65536.0,\"nonceForMostRecentBlock\":\"1523\",\"chainHash\":\"00F1E2D3C4B5A6978695A4B3C2D1E0F9E8D7C6B5A4938271605F4E3D2C1B0A09\"}",
+  "executionTime": 0
+}
+```
+**For "add" operation**,
+```json
+{
+  "status": "success",
+  "message": "Total execution time to add this block was 15 milliseconds",
+  "data": "",
+  "executionTime": 0
+}
+```
 
 ## Server Output Requirements
 
@@ -1409,3 +1419,4 @@ The autograder will:
 - [ ] All requests are properly signed
 
 Good luck!
+
