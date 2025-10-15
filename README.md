@@ -218,7 +218,7 @@ Enter difficulty > 1
 4
 Enter transaction
 Alice pays Bob 100 DSCoin
-Total execution time to add this block was 749 milliseconds
+Total execution time to mine this block was 749 milliseconds
 0. View basic blockchain status.
 1. Add a transaction to the blockchain.
 2. Verify the blockchain.
@@ -1419,4 +1419,5 @@ The autograder will:
 - [ ] All requests are properly signed
 
 Good luck!
+
 
